@@ -16,7 +16,7 @@
 // ============================================================
 
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
+import { TradingViewClientGrid } from '@/components/widgets/TradingViewClientWrapper'
 import {
   fetchAllCommodities,
   groupByCategory,
@@ -24,28 +24,6 @@ import {
   type CommodityQuote,
   type CommodityCategory,
 } from '@/lib/services/commoditiesService'
-
-// TradingViewGrid : Client Component — chargé uniquement côté navigateur
-// (les scripts TradingView ont besoin du DOM)
-const TradingViewGrid = dynamic(
-  () => import('@/components/widgets/TradingViewWidget').then((m) => m.TradingViewGrid),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-          gap: '0.8rem',
-        }}
-      >
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="skeleton-card" style={{ height: 180 }} />
-        ))}
-      </div>
-    ),
-  }
-)
 
 // ── Metadata SEO ──────────────────────────────────────────────
 
@@ -278,7 +256,7 @@ export default async function CommoditiesPage() {
           📊 Graphiques TradingView — 3 mois
         </h2>
         {/* dynamic import ssr:false — les widgets TradingView exigent le DOM */}
-        <TradingViewGrid items={tvItems} />
+        <TradingViewClientGrid items={tvItems} />
       </section>
 
     </div>
