@@ -295,6 +295,13 @@ export const NAVIGATION: Pole[] = [
         description: 'Page de Transparence Totale — 100+ APIs listées, Copyright © 2026',
         sources: ['100+ APIs référencées'],
       },
+      {
+        label: 'Contact',
+        href: '/contact',
+        icon: '✉️',
+        description: 'Formulaire de contact éditorial — signalement, partenariat, question',
+        sources: [],
+      },
     ],
   },
 ]
